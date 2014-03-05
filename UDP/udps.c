@@ -60,19 +60,18 @@ int RecvMsgByUdp(int nFile,void *pData,int *pnSize)
 
 int main()
 {
-	int ret,i = 0;
-	char szBuf[100];
-	while(1)
+	int nSock,nSize;
+	char szBuf[256];
+	//创建端口号为9999的UDP服务描述符
+	CreateUdpSock(&nSock,9999);
+	//循环接收UDP报文
+	nSize = sizeof(szBuf);
+	while(RecvMsgByUdp(nSock,szBuf,&nSize) == 0)
 	{
-		sprintf(szBuf,"第%d次发送",i);
-		ret = SendMsgByUdp(szBuf,strlen(szBuf),"127.0.0.1",9999);  //发送
-		if(ret == 0)
-			printf("Send UDP Success:%s %d\n",szBuf,strlen(szBuf));
-		else
-			printf("Send UDP Failed:%s\n",szBuf);
-		sleep(1);
-		i++;   //i代表发送的次数
+		printf("Recv UDP Data:[%d][%s]\n",strlen(szBuf),szBuf);
+		nSize = sizeof(szBuf);
 	}
 
+	close(nSock);
 }
 
