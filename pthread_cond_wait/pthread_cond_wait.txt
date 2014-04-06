@@ -1,0 +1,17 @@
+pthread_cond_wait(&cond,&mutex):
+当执行到此语句时，完成以下任务：
+
+<1>、解锁
+先解除之前的 pthread_mutex_lock 锁定的mutex。
+
+<2>、挂起
+阻塞并在等待队列里休眠，即该线程挂起，直到再次被唤醒，唤醒的条件是 pthread_cond_signal(&cond)，发出的cond信号来唤醒。
+
+当被唤醒后，对线程上锁，之后继续执行之后的语句。
+基本过程就是：block -> unblock -> wait ->return block
+
+pthread_cond_signal():
+包含以下任务：
+
+<1>、解除该线程解锁
+<2>、向包含pthread_cond_wait的线程发送信号
