@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+THREAD_POOL_H	tpool.h	2;"	d
+arg	tpool.h	/^  	void *arg;   	\/\/传入任务函数的参数$/;"	m	struct:tpool_work
+func	simpletpoll.c	/^void *func(void *arg)$/;"	f
+main	simpletpoll.c	/^int main()$/;"	f
+max_thr_num	tpool.h	/^	int max_thr_num;$/;"	m	struct:tpool
+next	tpool.h	/^	struct tpool_work *next;	$/;"	m	struct:tpool_work	typeref:struct:tpool_work::tpool_work
+queue_head	tpool.h	/^	tpool_work_t *queue_head;$/;"	m	struct:tpool
+queue_lock	tpool.h	/^	pthread_mutex_t queue_lock;$/;"	m	struct:tpool
+queue_ready	tpool.h	/^	pthread_cond_t queue_ready;$/;"	m	struct:tpool
+routine	tpool.h	/^	void *(*routine)(void *);   \/\/任务函数$/;"	m	struct:tpool_work
+shutdown	tpool.h	/^	int shutdown;$/;"	m	struct:tpool
+thr_id	tpool.h	/^	pthread_t *thr_id;$/;"	m	struct:tpool
+thread_routine	tpool.c	/^static void* thread_routine(void *arg)$/;"	f	file:
+tpool	tpool.c	/^static tpool_t *tpool = NULL;$/;"	v	file:
+tpool	tpool.h	/^typedef struct tpool$/;"	s
+tpool_add_work	tpool.c	/^int tpool_add_work(void *(*routine)(void *),void *arg)$/;"	f
+tpool_create	tpool.c	/^int tpool_create(int max_thr_num)$/;"	f
+tpool_destroy	tpool.c	/^void tpool_destroy()$/;"	f
+tpool_t	tpool.h	/^}tpool_t;$/;"	t	typeref:struct:tpool
+tpool_work	tpool.h	/^typedef struct tpool_work$/;"	s
+tpool_work_t	tpool.h	/^}tpool_work_t;$/;"	t	typeref:struct:tpool_work
