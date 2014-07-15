@@ -44,11 +44,11 @@ int main(int argc, char **argv)
 	
 	int connfd = accept(sock, (struct sockaddr*)&client, &client_addrlength);
 	if (connfd < 0) 
-    {
+        {
 		printf("errno is: %s\n", strerror(errno));
 	}
 	else 
-    {
+        {
 		int pipefd[2];
 				
 		ret = pipe(pipefd);  //创建管道
@@ -65,5 +65,5 @@ int main(int argc, char **argv)
 		close(connfd);
 	}
 	close(sock);
-    return 0;
+        return 0;
 }
