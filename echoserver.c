@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 //	struct sockaddr_in client;
 //	socklen_t client_addrlength = sizeof(client);
 	
+<<<<<<< HEAD
     int i  = 0;
     while(1)
     {
@@ -56,6 +57,16 @@ int main(int argc, char **argv)
 	    else 
         {
             int pipefd[2];
+=======
+	int connfd = accept(sock, (struct sockaddr*)&client, &client_addrlength);
+	if (connfd < 0) 
+        {
+		printf("errno is: %s\n", strerror(errno));
+	}
+	else 
+        {
+		int pipefd[2];
+>>>>>>> ce0d7dbbd0e872261af62b9c713498c3fa4317e2
 				
 		    ret = pipe(pipefd);  //创建管道
 		    assert(ret != -1);
@@ -68,10 +79,17 @@ int main(int argc, char **argv)
 		    ret = splice(pipefd[0], NULL, connfd, NULL,32768, 0);
 		    assert(ret != -1);				
 		
+<<<<<<< HEAD
 		    close(connfd);
 	    }
 	    //close(sock);
     }
     close(sock);
     return 0;
+=======
+		close(connfd);
+	}
+	close(sock);
+        return 0;
+>>>>>>> ce0d7dbbd0e872261af62b9c713498c3fa4317e2
 }
