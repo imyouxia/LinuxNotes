@@ -39,31 +39,39 @@ int main(int argc, char **argv)
 	ret = listen(sock, 5);
 	assert(ret != -1);
 	
-	struct sockaddr_in client;
-	socklen_t client_addrlength = sizeof(client);
+//	struct sockaddr_in client;
+//	socklen_t client_addrlength = sizeof(client);
 	
-	int connfd = accept(sock, (struct sockaddr*)&client, &client_addrlength);
-	if (connfd < 0) 
+    int i  = 0;
+    while(1)
     {
-		printf("errno is: %s\n", strerror(errno));
-	}
-	else 
-    {
-		int pipefd[2];
+		int connfd;
+        struct sockaddr_in client;
+        socklen_t client_addrlength = sizeof(client);
+        connfd = accept(sock, (struct sockaddr*)&client, &client_addrlength);
+        if(connfd < 0)
+        {
+            printf("errno is: %s,%d\n", strerror(errno),i++);
+	    }
+	    else 
+        {
+            int pipefd[2];
 				
-		ret = pipe(pipefd);  //创建管道
-		assert(ret != -1);
+		    ret = pipe(pipefd);  //创建管道
+		    assert(ret != -1);
 		
-        //将connfd上的客户端数据定向到管道中
-		ret = splice(connfd, NULL, pipefd[1], NULL,32768, 0);
-		assert(ret != -1);
+            //将connfd上的客户端数据定向到管道中
+		    ret = splice(connfd, NULL, pipefd[1], NULL,32768, 0);
+		    assert(ret != -1);
 		
-        //将管道的输出定向到connfd上
-		ret = splice(pipefd[0], NULL, connfd, NULL,32768, 0);
-		assert(ret != -1);				
+            //将管道的输出定向到connfd上
+		    ret = splice(pipefd[0], NULL, connfd, NULL,32768, 0);
+		    assert(ret != -1);				
 		
-		close(connfd);
-	}
-	close(sock);
+		    close(connfd);
+	    }
+	    //close(sock);
+    }
+    close(sock);
     return 0;
 }
