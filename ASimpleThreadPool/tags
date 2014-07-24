@@ -6,9 +6,13 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 THREAD_POOL_H	tpool.h	2;"	d
 arg	tpool.h	/^  	void *arg;   	\/\/传入任务函数的参数$/;"	m	struct:tpool_work
+cond	pthread_cond_wait/pthread_cond_wait.c	/^pthread_cond_t  cond = PTHREAD_COND_INITIALIZER;\/\/init cond$/;"	v
 func	simpletpoll.c	/^void *func(void *arg)$/;"	f
+i	pthread_cond_wait/pthread_cond_wait.c	/^int i = 1; \/\/global$/;"	v
+main	pthread_cond_wait/pthread_cond_wait.c	/^int main(void)$/;"	f
 main	simpletpoll.c	/^int main()$/;"	f
 max_thr_num	tpool.h	/^	int max_thr_num;$/;"	m	struct:tpool
+mutex	pthread_cond_wait/pthread_cond_wait.c	/^pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;\/*初始化互斥锁*\/$/;"	v
 next	tpool.h	/^	struct tpool_work *next;	$/;"	m	struct:tpool_work	typeref:struct:tpool_work::tpool_work
 queue_head	tpool.h	/^	tpool_work_t *queue_head;$/;"	m	struct:tpool
 queue_lock	tpool.h	/^	pthread_mutex_t queue_lock;$/;"	m	struct:tpool
@@ -16,6 +20,8 @@ queue_ready	tpool.h	/^	pthread_cond_t queue_ready;$/;"	m	struct:tpool
 routine	tpool.h	/^	void *(*routine)(void *);   \/\/任务函数$/;"	m	struct:tpool_work
 shutdown	tpool.h	/^	int shutdown;$/;"	m	struct:tpool
 thr_id	tpool.h	/^	pthread_t *thr_id;$/;"	m	struct:tpool
+thread1	pthread_cond_wait/pthread_cond_wait.c	/^void *thread1(void *junk)$/;"	f
+thread2	pthread_cond_wait/pthread_cond_wait.c	/^void *thread2(void*junk)$/;"	f
 thread_routine	tpool.c	/^static void* thread_routine(void *arg)$/;"	f	file:
 tpool	tpool.c	/^static tpool_t *tpool = NULL;$/;"	v	file:
 tpool	tpool.h	/^typedef struct tpool$/;"	s

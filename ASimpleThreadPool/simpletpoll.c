@@ -1,3 +1,7 @@
+/*
+ * 在调用tpool_destroy之后，仅将当前正在执行的任务完成之后就会退出，我们也可以修改代码使得线程池在执行完任务链表中所有任务后再退出。
+ */
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
