@@ -18,8 +18,9 @@ int main(void)
 
 	pthread_create(&t_a,NULL,thread2,(void*)NULL);
 	pthread_create(&t_b,NULL,thread1,(void*)NULL);//Create thread
- 
-	pthread_join(t_b,NULL);//wait a_b thread end
+    
+    pthread_join(t_a,NULL);
+	pthread_join(t_b,NULL);//wait t_a thread end
 	pthread_mutex_destroy(&mutex);
 	pthread_cond_destroy(&cond);
 	exit(0);
